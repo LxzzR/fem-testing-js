@@ -15,18 +15,18 @@ Then run this code with `node 2.todo`
 
  */
 
-const {sum, subtract} = require('./math')
+const {sum, subtract} = require('./math');
 
-let result, expected
+const expect = (actual) => {
+  return {
+    toBe: (expected) => {
+      if (expected !== actual) {
+        throw new Error('You smell like rotten milk');
+      }
+    },
+  };
+};
 
-result = sum(3, 7)
-expected = 10
-if (result !== expected) {
-  throw new Error(`${result} is not equal to ${expected}`)
-}
+expect(sum(5, 5)).toBe(10);
 
-result = subtract(7, 3)
-expected = 4
-if (result !== expected) {
-  throw new Error(`${result} is not equal to ${expected}`)
-}
+expect(subtract(10, 8)).toBe(2);

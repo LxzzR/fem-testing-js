@@ -25,24 +25,30 @@ Then run this code with `node 3.todo`
 
  */
 
-const {sum, subtract} = require('./math')
+const {sum, subtract} = require('./math');
 
-let result, expected
-
-result = sum(3, 7)
-expected = 10
-expect(result).toBe(expected)
-
-result = subtract(7, 3)
-expected = 4
-expect(result).toBe(expected)
+const test = (title, callback) => {
+  try {
+    callback();
+  } catch (error) {
+    console.log(`${title} is throwing an error: ${error}. Go check it out`);
+  }
+};
 
 function expect(actual) {
   return {
     toBe(expected) {
       if (actual !== expected) {
-        throw new Error(`${actual} is not equal to ${expected}`)
+        throw new Error(`${actual} is not equal to ${expected}`);
       }
     },
-  }
+  };
 }
+
+test('sum', () => {
+  expect(sum(5, 5)).toBe(10);
+});
+
+test('subtract', () => {
+  expect(subtract(7, 2)).toBe(5);
+});
