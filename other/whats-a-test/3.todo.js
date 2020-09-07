@@ -30,8 +30,9 @@ const {sum, subtract} = require('./math');
 const test = (title, callback) => {
   try {
     callback();
+    console.log(`☑ ${title}`);
   } catch (error) {
-    console.log(`${title} is throwing an error: ${error}. Go check it out`);
+    console.log(`ˣ ${title} is throwing an error: ${error}. Go check it out`);
   }
 };
 

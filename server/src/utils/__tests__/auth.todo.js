@@ -1,8 +1,28 @@
+import {isPasswordAllowed, userToJSON} from '../auth';
+
 test('isPasswordAllowed only allows some passwords', () => {
-  // here's where I'll demo things for you :)
-})
+  expect(isPasswordAllowed('')).toBe(false);
+  expect(isPasswordAllowed('ffffffffff')).toBe(false);
+  expect(isPasswordAllowed('8888888888')).toBe(false);
+  expect(isPasswordAllowed('skDl093.8')).toBe(true);
+});
 
 test('userToJSON excludes secure properties', () => {
+  const safeUser = {
+    id: '12345',
+    name: 'Sineapple',
+  };
+
+  const user = {
+    ...safeUser,
+    exp: new Date(),
+    iat: new Date(),
+    hash: 'some really long string',
+    salt: 'some shorter string',
+  };
+  const jsonUser = userToJSON(user);
+  expect(jsonUser).toEqual(safeUser);
+
   // Here you'll need to create a test user object
   // pass that to the userToJSON function
   // and then assert that the test user object
@@ -22,7 +42,7 @@ test('userToJSON excludes secure properties', () => {
   //   hash: 'some really long string',
   //   salt: 'some shorter string',
   // }
-})
+});
 
 //////// Elaboration & Feedback /////////
 // When you've finished with the exercises:
@@ -34,7 +54,7 @@ test('userToJSON excludes secure properties', () => {
 http://ws.kcd.im/?ws=Testing&e=auth%20util&em=
 */
 test.skip('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
-  expect(submitted).toBe(true)
-})
+  const submitted = false; // change this when you've submitted!
+  expect(submitted).toBe(true);
+});
 ////////////////////////////////
